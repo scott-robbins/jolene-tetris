@@ -1,0 +1,11 @@
+{
+  "name": "jolene-tetris",
+  "compatibility_date": "2025-10-01",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  },
+  "routes": [
+    { "pattern": "tetris.jolenesego.com", "custom_domain": true }
+  ]
+}
