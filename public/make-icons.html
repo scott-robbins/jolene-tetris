@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#111;color:#fff;font-family:sans-serif;padding:20px">
+<h3>Jolenetris icon maker</h3>
+<div id="out"></div>
+<script>
+const sizes = [['icon-512.png', 512], ['icon-192.png', 192], ['apple-touch-icon.png', 180]];
+function draw(s) {
+  const c = document.createElement('canvas');
+  c.width = c.height = s;
+  const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, s, s);
+  g.addColorStop(0, '#121a33'); g.addColorStop(1, '#0b1020');
+  x.fillStyle = g; x.fillRect(0, 0, s, s);
+  x.fillStyle = '#ff7a1a'; x.shadowColor = '#ff7a1a'; x.shadowBlur = s * 0.06;
+  x.font = '900 ' + (s * 0.55) + 'px -apple-system, Segoe UI, sans-serif';
+  x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText('J', s * 0.5, s * 0.42);
+  const b = s * 0.11, gap = s * 0.015, cols = ['#22e3ff', '#b44dff', '#3dff8a', '#ff3d6e'];
+  const sx = (s - (4 * b + 3 * gap)) / 2, sy = s * 0.74;
+  cols.forEach((col, i) => {
+    x.fillStyle = col; x.shadowColor = col; x.shadowBlur = s * 0.03;
+    x.fillRect(sx + i * (b + gap), sy, b, b);
+  });
+  return c;
+}
+sizes.forEach(([name, s]) => {
+  const c = draw(s);
+  c.style.cssText = 'width:120px;display:block;border-radius:24px';
+  const a = document.createElement('a');
+  a.href = c.toDataURL('image/png'); a.download = name;
+  a.textContent = 'Download ' + name;
+  a.style.cssText = 'display:block;margin:12px 0 24px;color:#ff7a1a';
+  document.getElementById('out').append(c, a);
+});
+</script>
+</body>
+</html>
